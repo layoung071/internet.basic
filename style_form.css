@@ -1,5 +1,19 @@
-input[type=text]{/* text 창에만 적용*/ color:red;}
-      input:hover,textarea:hover{/* 마우스 올라 올 때*/ background:aliceblue;}
-      input[type=text]:focus,input[type=email]:focus{/*포커스 받을 때*/ font-size : 120%;}
-      label{display:iblock; /*새 라인에서 시작*/ padding:10px;}
-      label span {display : inline-block; width:90px; text-align:right; padding:10px;}
+body {text-align: center; margin:0; padding:0}
+
+h1,h3 {text-align: center;}
+
+form {display: flex; justify-content: center; gap: 40px; text-align: left; margin-top: 30px; padding:20px; width:100%;}
+
+input[type=text],input[type=email]{color:red;}
+
+input:hover,textarea:hover{background:aliceblue;}
+
+input[type=text]:focus,input[type=email]:focus{font-size : 120%;}
+
+label{display:block; padding:10px;}
+
+label span {display : inline-block; width:100px; padding:10px;}
+
+input[type=checkbox] {margin-right: 10px;}
+
+input[type=submit] {margin-top: 10px; padding: 8px 16px; font-size: 16px; cursor: pointer;}

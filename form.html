@@ -3,30 +3,100 @@
   <head>
     <link rel="stylesheet" href="style_form.css">
     <meta charset="utf-8">
-    <title>폼 스타일 주기</title>
+    <title>웹폼</title>
+    <script>
+      function submitForm(event, day) {
+        event.preventDefault();
+
+        const form = event.target.closest("fieldset");
+        const name = form.querySelector('input[name="name"]').value;
+        const email = form.querySelector('input[name="email"]').value;
+        const message = form.querySelector('textarea[name="message"]').value;
+
+        const menu = Array.from(form.querySelectorAll('input[name="menu"]:checked'))
+          .map(cb => cb.value)
+          .join(', ');
+
+        fetch("https://script.google.com/macros/s/AKfycbyhAHv6HZOHUYkoJEwqHHWlII2PHr4ajtaa6llNiA9D4Tq12JP2rDuvQpzLv8Gffifmug/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `day=${encodeURIComponent(day)}&email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&message=${encodeURIComponent(message)}&menu=${encodeURIComponent(menu)}`
+        })
+        .then(() => {
+          alert("정보가 성공적으로 전송되었습니다!");
+        })
+        .catch(error => {
+          alert("전송 실패: " + error.message);
+        });
+      }
+    </script>
   </head>
   <body>
-    <h1>회원가입</h1>
-    <fieldset>
-      <span>name</span><input type="text" placeholder="layoung"><br>
-    </fieldset>
+    <h1>회식 참석 조사</h1>
+    <form>
+      <fieldset>
+        <h2>화요일 참석</h2>
+        <label>
+          <span>이름</span><input type="text" name="name" placeholder="김라영"><br>
+        </label>
+        <label>
+          <span>이메일</span><input type="email" name="email" placeholder="layoung@gmail.com"><br>
+        </label>
+        <label>
+          학교의 장단점에 대해 간단히 써주세요<br>
+          <textarea name="message"></textarea><br>
+          <hr>
+        저녁 메뉴 선택 (중복 불가)
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="김치찌개"> 김치찌개
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="된장찌개"> 된장찌개
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="마라탕"> 마라탕
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="갈비탕"> 갈비탕
+        </label>
+        <label>
+          <span></span><input type="submit" value="submit" onclick="submitForm(event, '화요일')">
+        </label>
+      </fieldset>
+      <fieldset>
+        <h2>목요일 참석</h2>
+        <label>
+          <span>이름</span><input type="text" name="name" placeholder="김라영"><br>
+        </label>
+        <label>
+          <span>이메일</span><input type="email" name="email" placeholder="layoung@gmail.com"><br>
+        </label>
+        <label>
+            학교의 장단점에 대해 간단히 써주세요<br>
+            <textarea name="message"></textarea><br>
+            <hr>
+            저녁 메뉴 선택 (중복 불가)
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="김치찌개"> 김치찌개
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="된장찌개"> 된장찌개
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="마라탕"> 마라탕
+        </label>
+        <label>
+          <input type="checkbox" name="menu" value="갈비탕"> 갈비탕
+        </label>
+        <label>
+          <span></span><input type="submit" value="submit" onclick="submitForm(event, '목요일')">
+        </label>
+      </fieldset>
+    </form>
   </body>
-  <h3>
-    contact us
-  </h3>
-  <hr>
-  <form>
-    <label>
-      <span>name</span><input type="text" placeholder="layoung"><br>
-    </label>
-    <label>
-      <span>email</span><input type="email" placeholder="layoung@gmail.com"><br>
-    </label>
-    <label>
-      <span>comment</span><textarea placeholder="메시지를 남겨주세요"></textarea><br>
-    </label>
-    <label>
-      <span></span><input type="submit" value="submit">
-    </label>
-  </form>
 </html>
